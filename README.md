@@ -1,25 +1,30 @@
-vite-react-ts-starter
-Create React-Ts App
-npm create vite@latest
-clear unnecessary files (index.css favicons etc.)
-Eslint Setup
-npm i -D eslint
-npx install-peerdeps --dev eslint-config-airbnb
-in .eslintrc.cjs find "extends" array, clear "eslint:recommended" and add "airbnb", "airbnb/hooks"
-it should be look like :
+# vite-react-ts-starter
 
-content_copy
+## Create React-Ts App
+
+1. `npm create vite@latest`
+2. clear unnecessary files (index.css favicons etc.)
+
+## Eslint Setup
+
+3. `npm i -D eslint`
+4. `npx install-peerdeps --dev eslint-config-airbnb`
+5. in .eslintrc.cjs find "extends" array, clear "eslint:recommended" and add  `"airbnb", "airbnb/hooks"`
+
+it should be look like :
+```js
   extends: [
     "airbnb",
     "airbnb/hooks",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
   ],
-npm i -D eslint-config-airbnb-typescript
-in .eslintrc.cjs find "extends" array, add "airbnb-typescript"
-it should be like this:
+```
+6. `npm i -D eslint-config-airbnb-typescript`
+7. in .eslintrc.cjs find "extends" array, add `"airbnb-typescript"`
 
-content_copy
+it should be like this:
+```js
   extends: [
     "airbnb",
     "airbnb-typescript",
@@ -27,24 +32,28 @@ content_copy
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
   ],
-in .eslintrc.cjs find "parserOptions" object, add project: './tsconfig.json'
-in .eslintrc.cjs find "rules" array, add 'react/react-in-jsx-scope':0
-Prettier Setup
-npm i -D prettier eslint-config-prettier eslint-plugin-prettier
-create .prettierrc.cjs at root folder
-add those lines:
-content_copy
+```
+8. in .eslintrc.cjs find "parserOptions" object, add `project: './tsconfig.json'`
+9. in .eslintrc.cjs find "rules" array, add `'react/react-in-jsx-scope':0`
+
+## Prettier Setup
+
+10. `npm i -D prettier eslint-config-prettier eslint-plugin-prettier`
+11. create `.prettierrc.cjs` at root folder
+12. add those lines:
+```js
 module.exports = {
     trailingComma: 'es5',
     tabWidth: 2,
     semi: true,
     singleQuote: true,
 };
-in .eslintrc.cjs find "plugins" array, add 'prettier'
-in .eslintrc.cjs find "extends" array, add 'plugin:prettier/recommended' to the LAST LINE to avoid conflicts with eslint
-it should be look like:
+```
+13. in .eslintrc.cjs find "plugins" array, add `'prettier'`
+14. in .eslintrc.cjs find "extends" array, add `'plugin:prettier/recommended'` to the **LAST LINE** to avoid conflicts with eslint
 
-content_copy
+it should be look like:
+```js
   extends: [
     'airbnb',
     'airbnb-typescript',
@@ -53,17 +62,20 @@ content_copy
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-Testing Setup
-npm install -D vitest
-refactor vite.config.ts to be look like this:
-content_copy
+```
+
+## Testing Setup
+
+15. `npm install -D vitest`
+16. refactor vite.config.ts to be look like this:
+```js
 /* eslint-disable import/no-extraneous-dependencies */
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
- 
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
- 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -73,23 +85,25 @@ export default defineConfig({
     setupFiles: ['./src/setupTests.ts'],
   },
 });
-in tsconfig.json file, find "include" array, add 'vite.config.ts'
-npm install --D @testing-library/react @testing-library/jest-dom
-create setupTests.ts inside /src folder and add those code:
-content_copy
+```
+17. in tsconfig.json file, find "include" array, add `'vite.config.ts'`
+18. `npm install --D @testing-library/react @testing-library/jest-dom`
+19. create setupTests.ts inside /src folder and add those code:
+```js
 /* eslint-disable import/no-extraneous-dependencies */
 import matchers from '@testing-library/jest-dom/matchers';
 import { expect } from 'vitest';
- 
+
 expect.extend(matchers);
-create App.test.tsx for first test
-add those lines to check if DOM has a text with "Hello Word"
-content_copy
+```
+20. create App.test.tsx for first test
+21. add those lines to check if DOM has a text with "Hello Word"
+```js
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
- 
+
 import App from './App';
- 
+
 describe('App', () => {
   it('Renders hello world', () => {
     // ARRANGE
@@ -103,17 +117,20 @@ describe('App', () => {
     ).toHaveTextContent('Hello Word');
   });
 });
-in package.json find "scripts" object, add "test": "vitest"
-to run tests now you can type npm test
-You can check queries for testing library from here
-React Router Setup
-npm install react-router-dom@6
-in App.tsx add React Router imports and modify the file as:
-content_copy
+```
+22. in package.json find "scripts" object, add `"test": "vitest"`
+23. to run tests now you can type `npm test`
+24. You can check queries for testing library from [here](https://testing-library.com/docs/queries/about/#priority)
+
+## React Router Setup
+
+25. `npm install react-router-dom@6`
+26. in App.tsx add React Router imports and modify the file as:
+```js
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
- 
+
 export function App() {
   return (
     <Routes>
@@ -122,7 +139,7 @@ export function App() {
     </Routes>
   );
 }
- 
+
 export function WrappedApp() {
   return (
     <HashRouter>
@@ -130,5 +147,8 @@ export function WrappedApp() {
     </HashRouter>
   );
 }
-in /src folder, create pages folder.
-create your "Home" and "NotFound" components here
+```
+27. in /src folder, create pages folder.
+28. create your "Home" and "NotFound" components here
+
+
